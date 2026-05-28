@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PricingFormulaEditor from "../components/pricing/PricingFormulaEditor.tsx";
+
+---
+
+<Layout title="Pricing Formula Editor">
+    <main class="flex flex-col px-3 py-4 gap-3">
+        <header>
+            <h2 class="text-sm md:text-3xl font-black tracking-tight mb-2">Editor de Fórmula de Precio</h2>
+            <p class="text-slate-400 text-xs md:text-base">
+                Configura cómo se transforman los costos de los proveedores en precios finales del mercado.
+            </p>
+        </header>
+        <PricingFormulaEditor client:load />
+    </main>
+</Layout>
