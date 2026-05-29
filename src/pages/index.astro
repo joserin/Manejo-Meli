@@ -2,13 +2,103 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Home">
-  <main class="flex flex-col w-full px-3 py-4 gap-3">
-    <header>
-      <h1>Welcome to Astro!</h1>
+<Layout title="Panel de Gestión - Meliact">
+  <main class="max-w-5xl mx-auto px-4 py-4 space-y-12">
+    {/* Hero Section Minimalista */}
+    <header class="text-center space-y-3 pt-4">
+      <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight sm:text-4xl">
+        Meliact <span class="text-blue-500 text-xl font-medium px-2 py-0.5 bg-blue-500/10 rounded-full border border-blue-500/20">v1.0</span>
+      </h1>
+      <p class="max-w-xl mx-auto text-sm text-slate-400">
+        Herramienta interna para la edición de fórmulas de precio y sincronización masiva de catálogos con Mercado Libre.
+      </p>
     </header>
+    {/* Accesos Directos - Secciones Principales */}
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      {/* Tarjeta 1: Editor de Precios */}
+      <div class="bg-[#161e2e] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col justify-between transition-all hover:border-slate-700">
+        <div class="space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-sm">
+            $
+          </div>
+          <h2 class="text-base font-bold text-slate-200">Simulador y Editor de Precios</h2>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Configura márgenes sugeridos por proveedor, establece rangos de costos fijos o porcentuales, añade delivery y calcula el impacto de las comisiones globales e IVA en tiempo real.
+          </p>
+        </div>
+        <div class="pt-5">
+          <a href="/precio" class="inline-flex items-center text-xs font-semibold text-blue-400 hover:text-blue-300 gap-1 group">
+            Ir al simulador 
+            <span class="transform transition-transform group-hover:translate-x-1">→</span>
+          </a>
+        </div>
+      </div>
 
-    <p>Astro is a modern static site builder that delivers lightning-fast performance and a great developer experience.</p>
+      {/* Tarjeta 2: Sincronizador */}
+      <div class="bg-[#161e2e] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col justify-between transition-all hover:border-slate-700">
+        <div class="space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-sm">
+            ⇄
+          </div>
+          <h2 class="text-base font-bold text-slate-200">Sincronizador de Plantillas</h2>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Sube los listados Excel de tus proveedores, mapea columnas y actualiza de manera automática los stocks y precios finales directo en tus plantillas oficiales de Mercado Libre.
+          </p>
+        </div>
+        <div class="pt-5">
+          <a href="/sincronizador" class="inline-flex items-center text-xs font-semibold text-emerald-400 hover:text-emerald-300 gap-1 group">
+            Abrir sincronizador 
+            <span class="transform transition-transform group-hover:translate-x-1">→</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    {/* Guía Rápida de Formatos de Plantilla (Sección Corta) */}
+    <section class="bg-[#161e2e]/50 border border-slate-800/80 rounded-xl p-5 space-y-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Requisitos de Estructura de Archivos</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+        
+        {/* Proveedor */}
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-300 flex items-center gap-1.5">
+            📋 Excel de Proveedores
+          </h4>
+          <p class="text-slate-400 leading-relaxed">
+            Es flexible. Durante el paso de mapeo en el sistema, podrás seleccionar libremente las columnas correspondientes al <strong class="text-slate-200">Código/OEM, Stock, Precio de costo</strong> y nombre.
+          </p>
+        </div>
+
+        {/* Mercado Libre */}
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-300 flex items-center gap-1.5">
+            💛 Plantilla Oficial ML (Hoja: 'Publicaciones')
+          </h4>
+          <p class="text-slate-400 leading-relaxed">
+            Debe contar obligatoriamente con las columnas estándar necesarias para procesar la inyección de datos:
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            {['N° de publicación', 'Código Universal', 'SKU', 'Título', 'Stock', 'Precio ($)'].map((campo) => (
+              <span class="bg-[#0b1120] border border-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono text-[10px]">
+                {campo}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    {/* Footer Minimalista */}
+    <footer class="text-center text-[10px] text-slate-600 pt-4 border-t border-slate-900">
+      Meliact &copy; {new Date().getFullYear()} &middot; Procesamiento local-first en navegador (XLSX Engine).
+    </footer>
 
   </main>
 </Layout>

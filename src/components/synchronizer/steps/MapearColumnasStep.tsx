@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-import { fuzzyMatch } from '../../../utils/fuzzyMatch';
 
 interface TargetField {
   key: string;

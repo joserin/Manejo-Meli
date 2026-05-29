@@ -1,6 +1,6 @@
 # Meliact
 
-Aplicación Astro + React para editar fórmulas de precio y sincronizar listados de proveedores con plantillas de Mercado Libre.
+Aplicación Astro + React para editar fórmulas de precio y sincronizar listados de proveedores con plantilla.
 
 ## 💡 Qué hace este proyecto
 
@@ -92,8 +92,4 @@ http://localhost:4321
 
 ## 📌 Nota
 
-El contenido actual está pensado para uso interno y validación de listas. Si deseas expandirlo, puedes añadir:
-- soporte de múltiples hojas en la plantilla ML,
-- importación de catálogos adicionales,
-- validaciones avanzadas de columnas y coincidencias,
-- generación de reportes en PDF.
+El contenido actual está pensado para uso interno y validación de listas.

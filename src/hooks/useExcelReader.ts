@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { DatosArchivoProveedor } from '../env.d.ts';
+import * as XLSX from 'xlsx';
 
 export function useExcelReader() {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -10,8 +11,6 @@ export function useExcelReader() {
     setError(null);
 
     try {
-      const XLSX = await import('xlsx');
-
       // 1. Procesar Proveedor
       const datosProveedorPromise = new Promise<DatosArchivoProveedor>((resolve, reject) => {
         const reader = new FileReader();
