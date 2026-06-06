@@ -69,15 +69,15 @@ export function prepararProductosProveedor(
     const producto: ProductoProcesado = {
       code_oem: code,
       brand: brand,
-      price: calculo.finalPrice,
+      price: Math.ceil(calculo.finalPrice),
       stock: stock,
       supplier_name: supplier || 'Sin Reglas',
     };
 
     // Indexación por código OEM como identificador único principal
-    const llaveCompuesta = `${supplier}_${brand}_${code}`;
+    const llaveLimpia = code.trim().toUpperCase();
 
-    proveedorMap.set(llaveCompuesta, producto);
+    proveedorMap.set(llaveLimpia, producto);
   });
 
   return proveedorMap;

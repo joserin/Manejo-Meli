@@ -33,6 +33,7 @@ export function useMeliSync() {
     // Variables para las Card
     let preciosActualizados = 0;
     let stockActualizados = 0;
+    console.log("=== SKUS DISPONIBLES EN EL PROVEEDOR ===", Array.from(proveedorMap.keys()));
 
     // FASE 3: Comparación secuencial (Orden de plantilla preservado)
     meliRows.forEach((row) => {
@@ -40,40 +41,18 @@ export function useMeliSync() {
       const filaClonada = { ...row };
       
       const skuMeli = limpiarCodigo(row[colSku]);
-      const oemMeli = limpiarCodigo(row[colOem]);
+      //const oemMeli = limpiarCodigo(row[colOem]);
 
-      if (!oemMeli && !skuMeli) {
+      if (!skuMeli) {
         filasActualizadasXlsx.push(filaClonada);
         return;
       }
 
-      let prodProveedor = null;
-
-      if (skuMeli) {
-        prodProveedor = proveedorMap.get(skuMeli);
-      }
-
-      if (!prodProveedor && oemMeli) {
-        const coincidencias = listaProductosProveedor.filter(p => p.code_oem === oemMeli);
-
-        if (coincidencias.length === 1) {
-          // Si hay una única coincidencia por código de pieza, la tomamos directamente
-          prodProveedor = coincidencias[0];
-        } else if (coincidencias.length > 1) {
-          // Si hay varios proveedores o marcas con el mismo código, usamos el SKU de la plantilla para desempatar
-          const desempate = coincidencias.find(p => {
-            const llaveCompuestaProveedor = `${p.supplier_name}_${p.brand}_${p.code_oem}`.toUpperCase();
-            return skuMeli.toUpperCase() === llaveCompuestaProveedor;
-          });
-          
-          // Si no hace match exacto el desempate, tomamos el primero disponible por defecto para no dejarlo sin actualizar
-          prodProveedor = desempate || coincidencias[0];
-        }
-      }
+      let prodProveedor = proveedorMap.get(skuMeli);
 
       // Si encontramos el producto en el proveedor, comparamos y actualizamos
       if (prodProveedor) {
-        const oldPrice = parseFloat(String(row[colPrecio]).replace(/[^0-9.]/g, '')) || 0;
+        const oldPrice = Math.ceil(parseFloat(String(row[colPrecio]).replace(/[^0-9.]/g, '')) || 0);
         const oldStock = parseInt(String(row[colStock]).replace(/[^0-9]/g, ''), 10) || 0;
 
         const newPrice = prodProveedor.price;
@@ -90,7 +69,7 @@ export function useMeliSync() {
           if (cambioStock) stockActualizados++;
 
           listaCambios.push({
-            sku: row[colSku] || '',
+            sku: row[colSku],
             oem: row[colOem] || '',
             descripcion: colTitulo ? String(row[colTitulo]).trim() : '',
             oldPrice,

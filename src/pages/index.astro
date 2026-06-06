@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Panel de Gestión - Meliact">
-  <main class="max-w-5xl mx-auto px-4 py-4 space-y-12">
+  <main class="max-w-5xl mx-auto px-4 py-3 space-y-12">
     {/* Hero Section Minimalista */}
     <header class="text-center space-y-3 pt-4">
       <h1 class="text-3xl font-extrabold text-slate-100 tracking-tight sm:text-4xl">
@@ -82,9 +82,10 @@ import Layout from '../layouts/Layout.astro';
           </h4>
           <p class="text-slate-400 leading-relaxed">
             Debe contar obligatoriamente con las columnas estándar necesarias para procesar la inyección de datos:
+            <strong class="text-[0.6rem] text-slate-200">sku campo comparacion</strong>
           </p>
           <div class="flex flex-wrap gap-1.5 pt-1">
-            {['N° de publicación', 'Código Universal', 'SKU', 'Título', 'Stock', 'Precio ($)'].map((campo) => (
+            {['N° de publicación', 'Código', '*SKU', 'Título', 'Stock', 'Precio ($)'].map((campo) => (
               <span class="bg-[#0b1120] border border-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono text-[10px]">
                 {campo}
               </span>
